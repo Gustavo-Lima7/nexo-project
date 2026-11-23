@@ -100,11 +100,26 @@ function WorkoutsPage() {
     const weightKg = Number(exWeight);
     const restSec = Number(exRest);
 
-    if (!cleanName) return toast.error("Informe o nome do exercício.");
-    if (!Number.isInteger(sets) || sets < 1 || sets > 20) return toast.error("Séries devem ficar entre 1 e 20.");
-    if (!Number.isInteger(reps) || reps < 1 || reps > 100) return toast.error("Repetições devem ficar entre 1 e 100.");
-    if (!Number.isFinite(weightKg) || weightKg < 0 || weightKg > 600) return toast.error("Carga inválida.");
-    if (!Number.isFinite(restSec) || restSec < 0 || restSec > 600) return toast.error("Descanso inválido.");
+    if (!cleanName) {
+      toast.error("Informe o nome do exercício.");
+      return;
+    }
+    if (!Number.isInteger(sets) || sets < 1 || sets > 20) {
+      toast.error("Séries devem ficar entre 1 e 20.");
+      return;
+    }
+    if (!Number.isInteger(reps) || reps < 1 || reps > 100) {
+      toast.error("Repetições devem ficar entre 1 e 100.");
+      return;
+    }
+    if (!Number.isFinite(weightKg) || weightKg < 0 || weightKg > 600) {
+      toast.error("Carga inválida.");
+      return;
+    }
+    if (!Number.isFinite(restSec) || restSec < 0 || restSec > 600) {
+      toast.error("Descanso inválido.");
+      return;
+    }
 
     const nextExercises = editingExId
       ? activeWorkout.exercises.map((ex) =>

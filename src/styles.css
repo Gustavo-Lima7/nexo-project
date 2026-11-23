@@ -168,6 +168,7 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
   }
 }
 
@@ -182,8 +183,27 @@
 }
 
 .doc-canvas {
-  max-width: 52rem;
+  max-width: 100%;
   margin-inline: auto;
+}
+
+.app-frame {
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.safe-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .btn-google-signin {

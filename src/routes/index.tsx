@@ -65,57 +65,66 @@ function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-8">
+    <div className="min-h-dvh bg-muted/40 text-foreground">
+      <div className="app-frame flex min-h-dvh flex-col justify-between bg-background px-5 py-6 md:border-x md:border-border">
+        <header className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-sm font-semibold text-primary-foreground">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-sm font-semibold text-primary-foreground">
               N
             </span>
             <span className="page-title text-xl font-semibold">Nexo</span>
           </div>
-          <div className="flex items-center gap-3">
-            {checked && userEmail ? (
-              <>
-                <span className="hidden text-sm text-muted-foreground sm:inline">{userEmail}</span>
-                <Button asChild size="sm">
-                  <Link to="/anotacoes">Abrir Nexo</Link>
-                </Button>
-                <Button type="button" variant="ghost" size="sm" onClick={handleSignOut}>
-                  <LogOut className="mr-1.5 h-4 w-4" />
-                  Sair
-                </Button>
-              </>
-            ) : (
-              <Button asChild size="sm">
-                <Link to="/auth" search={{ redirect: undefined }}>Entrar</Link>
-              </Button>
-            )}
-          </div>
-        </div>
-      </header>
+          {checked && userEmail ? (
+            <Button type="button" variant="ghost" size="sm" onClick={handleSignOut}>
+              <LogOut className="mr-1.5 h-4 w-4" />
+              Sair
+            </Button>
+          ) : (
+            <Button asChild variant="ghost" size="sm">
+              <Link to="/auth" search={{ redirect: undefined }}>Entrar</Link>
+            </Button>
+          )}
+        </header>
 
-      <main className="mx-auto max-w-5xl px-4 py-14 sm:px-8 sm:py-24">
-        <section className="max-w-3xl">
+        <main className="my-auto py-10">
           <p className="text-xs font-medium uppercase tracking-[0.14em] text-primary">
-            Espaço pessoal e academia
+            App pessoal e academia
           </p>
-          <h1 className="page-title mt-4 text-4xl font-medium leading-[1.08] text-foreground sm:text-6xl">
-            Anotações, rotina e treinos no mesmo lugar.
+          <h1 className="page-title mt-3 text-4xl font-medium leading-[1.1] text-foreground">
+            Anotações, diário e treinos no bolso.
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Escreva em páginas de blocos, acompanhe lembretes e diário, ajuste suas cargas na academia e calcule calorias e massa corporal com sincronização na nuvem.
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            Escreva em blocos no estilo Notion, organize lembretes e diário, ajuste suas cargas na academia e acompanhe calorias e massa corporal sincronizados na nuvem.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+
+          <ul className="mt-7 divide-y divide-border border-y border-border text-sm">
+            <li className="py-3">
+              <span className="font-medium text-foreground">Notas e lembretes</span>
+              <span className="block text-xs text-muted-foreground">Páginas com checklists, listas e horários</span>
+            </li>
+            <li className="py-3">
+              <span className="font-medium text-foreground">Diário diário</span>
+              <span className="block text-xs text-muted-foreground">Humor e reflexões separados por data</span>
+            </li>
+            <li className="py-3">
+              <span className="font-medium text-foreground">Academia completa</span>
+              <span className="block text-xs text-muted-foreground">Fichas, ajuste de carga, calorias e IMC/massa</span>
+            </li>
+          </ul>
+
+          <div className="mt-8">
             {userEmail ? (
-              <Button asChild size="lg">
-                <Link to="/anotacoes">
-                  Abrir meu espaço
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+              <div className="space-y-2">
+                <Button asChild size="lg" className="h-12 w-full text-base">
+                  <Link to="/anotacoes">
+                    Abrir meu Nexo
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <p className="text-center text-xs text-muted-foreground">{userEmail}</p>
+              </div>
             ) : (
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="h-12 w-full text-base">
                 <Link to="/auth" search={{ redirect: undefined }}>
                   Entrar ou criar conta
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -123,39 +132,12 @@ function Index() {
               </Button>
             )}
           </div>
-        </section>
+        </main>
 
-        <section className="mt-16 grid gap-10 border-t border-border pt-12 md:grid-cols-2">
-          <div>
-            <h2 className="page-title text-2xl font-medium">Organização estilo Notion</h2>
-            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-              <li className="border-b border-border/70 pb-3">
-                <strong className="font-medium text-foreground">Anotações em blocos</strong> — títulos, texto, listas e checklists editáveis salvos na sua conta.
-              </li>
-              <li className="border-b border-border/70 pb-3">
-                <strong className="font-medium text-foreground">Lembretes</strong> — compromissos com data, horário e marcação rápida de concluído.
-              </li>
-              <li>
-                <strong className="font-medium text-foreground">Diário pessoal</strong> — uma página por dia com registro de humor e reflexões.
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="page-title text-2xl font-medium">Academia e métricas</h2>
-            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-              <li className="border-b border-border/70 pb-3">
-                <strong className="font-medium text-foreground">Treinos e ajustes</strong> — monte fichas, ajuste cargas em segundos e marque séries feitas.
-              </li>
-              <li className="border-b border-border/70 pb-3">
-                <strong className="font-medium text-foreground">Cálculo de calorias</strong> — taxa metabólica, gasto diário, meta por objetivo e registro de refeições.
-              </li>
-              <li>
-                <strong className="font-medium text-foreground">Massa e peso</strong> — IMC, faixa ideal, massa magra e evolução em gráfico.
-              </li>
-            </ul>
-          </div>
-        </section>
-      </main>
+        <footer className="text-center text-xs text-muted-foreground">
+          Pronto para adicionar à tela inicial do celular
+        </footer>
+      </div>
     </div>
   );
 }
